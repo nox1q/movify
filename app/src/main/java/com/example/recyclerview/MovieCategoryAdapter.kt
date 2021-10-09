@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.movie_recycler.view.*
 class MovieCategoryAdapter(
     private val moviesByCategory: List<MovieResponse>,
     private val categoryList: List<String>,
+    private val onMovieClickListener: OnMovieClickListener
 ) :
     RecyclerView.Adapter<MovieCategoryAdapter.MovieCategoryViewHolder>() {
     override fun onCreateViewHolder(
@@ -27,7 +28,7 @@ class MovieCategoryAdapter(
         holder: MovieCategoryViewHolder,
         position: Int
     ) {
-        val moviesAdapter = MoviesAdapter(moviesByCategory[position].movies)
+        val moviesAdapter = MoviesAdapter(moviesByCategory[position].movies,onMovieClickListener)
         holder.itemView.tv_movie_topic.text = categoryList[position]
         holder.itemView.movies_recycler.adapter = moviesAdapter
     }

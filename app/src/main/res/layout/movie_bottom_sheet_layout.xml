@@ -1,63 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_dialog">
+    android:background="#444444"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_movie_poster"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_bs_movie_poster"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:id="@+id/iv_movie_poster"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:background="@color/black" />
 
-        <!--text view for displaying course name-->
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tv_movie_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cv_movie_poster"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_movie_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/ll_learn_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cv_movie_poster"
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+    <LinearLayout
+        android:id="@+id/ll_learn_more"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="8dp"
+        android:background="#DA0037"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_movie_poster">
+
         <TextView
-            android:id="@+id/tv_bs_movie_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/iv_bs_movie_poster"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Learn more"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-        <!--text view for displaying course tracks-->
-        <TextView
-            android:id="@+id/tv_bs_movie_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_bs_movie_title"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/iv_bs_movie_poster"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_bs_movie_vote_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_bs_movie_id"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/iv_bs_movie_poster"
-            android:layout_toRightOf="@id/iv_bs_movie_poster"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/btn_bs_goto_movie_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_bs_movie_poster"
-            android:layout_margin="10dp"
-            android:textAllCaps="false" />
-
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

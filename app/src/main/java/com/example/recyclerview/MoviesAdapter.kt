@@ -7,6 +7,8 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.movie_item.view.*
 import kotlinx.android.synthetic.main.movie_recycler.view.*
@@ -17,28 +19,29 @@ class MoviesAdapter(
 ) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
-    class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(movie: Movie) {
+    class MovieViewHolder(private val view: View, private val onMovieClickListener: OnMovieClickListener) : RecyclerView.ViewHolder(view) {
+        fun bind(movie: Movie) = with(view) {
+            iv_movie_poster.setOnClickListener {
+                onMovieClickListener.onClick(movie)
+            }
+
             val url = "https://image.tmdb.org/t/p/original/" + movie.poster
-            Glide.with(view.iv_movie_poster)
+            Glide.with(iv_movie_poster)
                 .load(url)
-                .into(view.iv_movie_poster)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(8)))
+                .into(iv_movie_poster)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.movie_item, parent, false)
-        )
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.movie_item, parent, false)
+
+        return MovieViewHolder(view, onMovieClickListener)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies[position])
-        holder.itemView.setOnClickListener {
-            onMovieClickListener.onClick(movies[position])
-        }
-
     }
 
     override fun getItemCount(): Int = movies.size
