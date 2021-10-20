@@ -1,7 +1,9 @@
 package com.example.recyclerview
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -22,6 +24,13 @@ class MovieDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
+
         MovieDetailsApi().getMovieDetails(intent.getIntExtra("movie_id", 0))
             .enqueue(object : Callback<MovieDetails> {
                 override fun onResponse(
@@ -72,6 +81,13 @@ class MovieDetailsActivity : AppCompatActivity() {
             .load(url)
             .into(iv_movie_poster)
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> finish()
+        }
+        return true
     }
 
 }

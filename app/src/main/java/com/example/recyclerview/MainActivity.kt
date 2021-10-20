@@ -7,12 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.movie_bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.movie_bottom_sheet_layout.view.*
@@ -26,21 +28,14 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         MoviePreviewBottomSheet.newInstance(movie).show(supportFragmentManager, "tag")
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
-
-        return true
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        action_search.setOnClickListener {
-//            val intent = Intent(this, SearchActivity::class.java)
-//            startActivity(intent)
-//        }
+        setSupportActionBar(toolbar_activity_main)
         val listOfMovieResponse: MutableList<MovieResponse> = mutableListOf()
         val listOfTopics = listOf("Popular", "Upcoming", "Now Playing", "Top Rated")
         bindApi(listOfMovieResponse, listOfTopics)
+
     }
 
     private fun bindApi(
@@ -107,4 +102,18 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> {
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
 }

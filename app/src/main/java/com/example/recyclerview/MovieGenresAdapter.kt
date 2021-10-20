@@ -16,9 +16,7 @@ class MovieGenresAdapter(
 ) :
     RecyclerView.Adapter<MovieGenresAdapter.MovieGenresViewHolder>() {
 
-    class MovieGenresViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-
-    }
+    class MovieGenresViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieGenresViewHolder {
         val view = LayoutInflater.from(parent.context)

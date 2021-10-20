@@ -22,6 +22,13 @@ interface MoviesApi {
     @GET("3/movie/now_playing")
     fun getNowPlayingMovies(@Query("api_key") apiKey: String = API_KEY): Call<MovieResponse>
 
+    @GET("3/search/movie")
+    fun getQueryMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("api_key") apiKey: String = API_KEY
+    ): Call<MovieResponse>
+
     companion object {
         operator fun invoke(): MoviesApi {
             return Retrofit.Builder()

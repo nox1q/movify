@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".QueryMovieDetailsActivity"></activity>
+        <activity android:name=".SearchListScreenActivity" />
+        <activity android:name=".SearchActivity" />
         <activity android:name=".MovieDetailsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

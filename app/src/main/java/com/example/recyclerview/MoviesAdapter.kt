@@ -19,7 +19,10 @@ class MoviesAdapter(
 ) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
-    class MovieViewHolder(private val view: View, private val onMovieClickListener: OnMovieClickListener) : RecyclerView.ViewHolder(view) {
+    class MovieViewHolder(
+        private val view: View,
+        private val onMovieClickListener: OnMovieClickListener
+    ) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie) = with(view) {
             iv_movie_poster.setOnClickListener {
                 onMovieClickListener.onClick(movie)

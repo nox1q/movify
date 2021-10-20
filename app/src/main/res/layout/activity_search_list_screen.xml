@@ -6,28 +6,22 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".SearchActivity">
+    tools:context=".SearchListScreenActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
-        android:iconifiedByDefault="false"
-        android:searchHintIcon="@null"
-        android:searchIcon="@null"
+        android:background="#383637"
         android:textColorHint="@color/white"
-        android:theme="@style/ToolbarTheme"
         app:contentInsetStartWithNavigation="0dp" />
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_queries"
+        android:id="@+id/rv_movie_queries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/search_item">
+        tools:listitem="@layout/query_item" />
 
-    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
