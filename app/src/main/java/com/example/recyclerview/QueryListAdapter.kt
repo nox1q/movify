@@ -1,6 +1,5 @@
 package com.example.recyclerview
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,7 @@ class QueryListAdapter(
         fun bind(movie: MovieResponse) = with(view) {
             view.setOnClickListener {
                 movie.movies[position].id?.let { it1 ->
-                    onQueryMovieClickListener.onQueryMovieClickListener(
+                    onQueryMovieClickListener.onQueryMovieClicked(
                         view,
                         movie,
                         position,

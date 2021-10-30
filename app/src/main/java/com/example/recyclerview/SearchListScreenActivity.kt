@@ -3,6 +3,7 @@ package com.example.recyclerview
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -15,7 +16,7 @@ import retrofit2.Response
 
 class SearchListScreenActivity : AppCompatActivity(), OnQueryMovieClickListener {
 
-    override fun onQueryMovieClickListener(
+    override fun onQueryMovieClicked(
         view: View,
         movieResponse: MovieResponse,
         position: Int,
@@ -49,6 +50,7 @@ class SearchListScreenActivity : AppCompatActivity(), OnQueryMovieClickListener 
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                Log.d("query", "on failure")
                 Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
             }
 
@@ -57,7 +59,7 @@ class SearchListScreenActivity : AppCompatActivity(), OnQueryMovieClickListener 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> startActivity(Intent(this, MainActivity::class.java))
+            android.R.id.home -> finish()
         }
         return true
     }

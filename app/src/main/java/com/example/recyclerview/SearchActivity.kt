@@ -10,34 +10,48 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.Data.Search
 import com.example.recyclerview.Data.SearchQueryRepository
+import com.example.recyclerview.Data.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.activity_search_list_screen.*
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity(), OnQuerySearchClickListener {
 
+    private lateinit var mSearchViewModel: SearchViewModel
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val adapter = SearchQueryAdapter(this)
+        rv_search_queries.adapter = adapter
         rv_search_queries.layoutManager = LinearLayoutManager(this)
-        rv_search_queries.adapter = SearchQueryAdapter()
+        mSearchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        mSearchViewModel.getSearchQueries.observe(this, { query ->
+            adapter.setData(query)
+        })
     }
 
     private fun searching(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val intent =
-                    Intent(this@SearchActivity, SearchListScreenActivity::class.java).apply {
-                        putExtra("query", query)
-                    }
-                startActivity(intent)
+                val search = query?.let { Search(it) }
+                if (search != null) {
+                    mSearchViewModel.insertSearchQuery(search)
+                }
+                if (query != null) {
+                    navigateToSearchList(query)
+                }
                 return false
             }
 
@@ -70,5 +84,15 @@ class SearchActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onQuerySearchClicked(query: String) {
+        navigateToSearchList(query)
+    }
 
+    private fun navigateToSearchList(query: String) {
+        val intent = Intent(this@SearchActivity, SearchListScreenActivity::class.java).apply {
+            putExtra("query", query)
+        }
+        startActivity(intent)
+        finish()
+    }
 }

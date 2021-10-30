@@ -17,6 +17,8 @@
         android:id="@+id/tv_search_query"
         android:layout_width="0dp"
         android:layout_height="24dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toStartOf="@id/iv_search_query"
         app:layout_constraintStart_toEndOf="@id/iv_search_icon"

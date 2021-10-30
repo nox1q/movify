@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.Data.Search
 import kotlinx.android.synthetic.main.search_item.view.*
 
-class SearchQueryAdapter() : RecyclerView.Adapter<SearchQueryAdapter.SearchQueryViewHolder>() {
+class SearchQueryAdapter(val onQuerySearchClickListener: OnQuerySearchClickListener) :
+    RecyclerView.Adapter<SearchQueryAdapter.SearchQueryViewHolder>() {
 
-    private var oldData = emptyList<Search>()
+    private var queryList = emptyList<Search>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -21,15 +22,18 @@ class SearchQueryAdapter() : RecyclerView.Adapter<SearchQueryAdapter.SearchQuery
     }
 
     override fun onBindViewHolder(holder: SearchQueryViewHolder, position: Int) {
-        holder.itemView.tv_search_query.text = oldData[position].query
+        holder.itemView.tv_search_query.text = queryList[position].query
+        holder.itemView.setOnClickListener {
+            onQuerySearchClickListener.onQuerySearchClicked(queryList[position].query)
+        }
     }
 
-    override fun getItemCount(): Int = oldData.size
+    override fun getItemCount(): Int = queryList.size
 
-    class SearchQueryViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
+    class SearchQueryViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    fun setData(newData: List<Search>) {
-        oldData = newData
+    fun setData(query: List<Search>) {
+        this.queryList = query
         notifyDataSetChanged()
     }
 }
