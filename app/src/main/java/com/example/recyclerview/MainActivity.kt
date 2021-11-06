@@ -91,8 +91,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
                     PopularMovies.adapter = MovieCategoryAdapter(
                         listOfMovieResponse,
                         listOfTopics,
-                        this@MainActivity
-                    )
+                        this@MainActivity)
                 }
             }
 
