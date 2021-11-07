@@ -1,6 +1,8 @@
-package com.example.recyclerview.home
+package com.example.recyclerview.home.domain.repository
 
 import androidx.annotation.WorkerThread
+import com.example.recyclerview.common.Response
+import com.example.recyclerview.home.domain.model.Movie
 
 interface MovieRepository {
     @WorkerThread

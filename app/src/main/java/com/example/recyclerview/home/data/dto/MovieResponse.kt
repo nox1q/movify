@@ -1,4 +1,4 @@
-package com.example.recyclerview.home
+package com.example.recyclerview.home.data.dto
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

@@ -1,4 +1,4 @@
-package com.example.recyclerview.home
+package com.example.recyclerview.home.domain.model
 
 data class Movie(
     val id: Int,

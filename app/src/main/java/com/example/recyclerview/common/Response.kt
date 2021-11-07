@@ -1,4 +1,4 @@
-package com.example.recyclerview.home
+package com.example.recyclerview.common
 
 sealed class Response<out Result, out Error> {
     data class Success<out Result>(val result: Result): Response<Result, Nothing>()

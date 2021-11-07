@@ -1,4 +1,11 @@
-package com.example.recyclerview.home
+package com.example.recyclerview.home.data.repository
+
+import com.example.recyclerview.common.Response
+import com.example.recyclerview.home.data.mapper.MovieResponseMapper
+import com.example.recyclerview.home.data.source.MovieNetworkSource
+import com.example.recyclerview.home.domain.model.Movie
+import com.example.recyclerview.home.domain.repository.MovieRepository
+import com.example.recyclerview.common.network.executeCall
 
 class BaseMovieRepository(
     private val movieNetworkSource: MovieNetworkSource,
